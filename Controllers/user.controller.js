@@ -1,3 +1,4 @@
+const { default: mongoose } = require("mongoose");
 const Admin = require("../Models/admin.model");
 const Assignment = require("../Models/assignment.model");
 const { success,error } = require("../Utils/responseWrapper");
@@ -22,6 +23,14 @@ const getAllAdmins = async (req, res) => {
 const uploadAssignment = async (req, res) => {
   const { task, adminId } = req.body;
   const userId = req.user._id;
+
+  if(!task || !adminId) {
+    return res.status(400).json(error(400, "Task and adminId are required"));
+  }
+
+  if(!mongoose.Types.ObjectId.isValid(adminId)) {
+    return res.status(400).json(error(400, "Invalid adminId format"));
+  }
 
   try {
     const assignment = new Assignment({

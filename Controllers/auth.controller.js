@@ -1,6 +1,3 @@
-const User = require("../Models/user.model");
-const Admin = require("../Models/admin.model");
-
 const { error } = require("../Utils/responseWrapper");
 const sendToken = require("../Utils/tokenHelper");
 const { normalizeInput } = require("../Utils/inputValidator"); // Import the normalization function
